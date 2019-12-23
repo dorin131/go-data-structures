@@ -16,14 +16,14 @@ type Node struct {
 
 // New : Create a new Linked List
 func New() *LinkedList {
-	newLinkedList := &LinkedList{
-		Head: &Node{
-			Next: nil,
-			Data: nil,
-		},
+	emptyNode := &Node{
+		Next: nil,
+		Data: nil,
 	}
-	newLinkedList.Tail = newLinkedList.Head
-	return newLinkedList
+	return &LinkedList{
+		Head: emptyNode,
+		Tail: emptyNode,
+	}
 }
 
 // Append : Appending a new node to the end of the Linked List
@@ -34,11 +34,10 @@ func (ll *LinkedList) Append(d interface{}) *LinkedList {
 	}
 	if ll.Head.Data == nil {
 		ll.Head = nextNode
-		ll.Tail = nextNode
 	} else {
 		ll.Tail.Next = nextNode
-		ll.Tail = nextNode
 	}
+	ll.Tail = nextNode
 	return ll
 }
 
