@@ -1,3 +1,6 @@
+/*
+Package linkedlist provides a Linked List data structure
+*/
 package linkedlist
 
 import "fmt"
