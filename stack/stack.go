@@ -1,5 +1,5 @@
 /*
-Package stack provides a Stack data structure
+Package stack provides a slice-based Stack data structure
 */
 package stack
 
