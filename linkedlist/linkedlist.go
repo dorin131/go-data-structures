@@ -55,10 +55,10 @@ func (ll *LinkedList) DeleteWithValue(v interface{}) *LinkedList {
 		if v == node.Next.Data {
 			if node.Next.Next != nil {
 				node.Next = node.Next.Next
-				return ll
+				break
 			}
 			node.Next = nil
-			return ll
+			break
 		}
 		node = node.Next
 	}
