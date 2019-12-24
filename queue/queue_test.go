@@ -6,14 +6,14 @@ import (
 
 func ExampleQueue() {
 	queue := New()
-	result, _ := queue.Add(1).Add(2).Add(3).Peek()
+	result, _ := queue.Queue(1).Queue(2).Queue(3).Peek()
 	fmt.Println(result)
 	fmt.Println(queue.IsEmpty())
-	result, _ = queue.Remove()
+	result, _ = queue.Dequeue()
 	fmt.Println(result)
-	result, _ = queue.Remove()
+	result, _ = queue.Dequeue()
 	fmt.Println(result)
-	queue.Remove()
+	queue.Dequeue()
 	fmt.Println(queue.IsEmpty())
 	_, err := queue.Peek()
 	fmt.Println(err)

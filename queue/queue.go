@@ -31,13 +31,13 @@ func (q *Queue) Peek() (int, error) {
 }
 
 // Add : adds an element onto the queue
-func (q *Queue) Add(n int) *Queue {
+func (q *Queue) Queue(n int) *Queue {
 	q.data = append(q.data, n)
 	return q
 }
 
 // Remove : removes the next element from the queue and returns its value
-func (q *Queue) Remove() (int, error) {
+func (q *Queue) Dequeue() (int, error) {
 	if len(q.data) == 0 {
 		return 0, fmt.Errorf("Queue is empty")
 	}
