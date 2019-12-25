@@ -30,13 +30,14 @@ func (q *Queue) Peek() (int, error) {
 	return q.data[0], nil
 }
 
-// Add : adds an element onto the queue
+// Queue : adds an element onto the queue
 func (q *Queue) Queue(n int) *Queue {
 	q.data = append(q.data, n)
 	return q
 }
 
-// Remove : removes the next element from the queue and returns its value
+// Dequeue : removes the next element from the queue
+// and returns its value
 func (q *Queue) Dequeue() (int, error) {
 	if len(q.data) == 0 {
 		return 0, fmt.Errorf("Queue is empty")

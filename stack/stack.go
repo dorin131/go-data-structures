@@ -17,7 +17,8 @@ func New() *Stack {
 	}
 }
 
-// IsEmpty : will return a boolean indicating whether there are any elements on the stack
+// IsEmpty : will return a boolean indicating whether there
+// are any elements on the stack
 func (s *Stack) IsEmpty() bool {
 	return len(s.data) == 0
 }
@@ -36,7 +37,8 @@ func (s *Stack) Push(n int) *Stack {
 	return s
 }
 
-// Pop : removes an element from the stack and returns its value
+// Pop : removes an element from the stack and returns
+// its value
 func (s *Stack) Pop() (int, error) {
 	if len(s.data) == 0 {
 		return 0, fmt.Errorf("Stack is empty")
