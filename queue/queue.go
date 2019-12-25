@@ -30,8 +30,8 @@ func (q *Queue) Peek() (int, error) {
 	return q.data[0], nil
 }
 
-// Queue : adds an element onto the queue
-func (q *Queue) Queue(n int) *Queue {
+// Enqueue : adds an element onto the queue
+func (q *Queue) Enqueue(n int) *Queue {
 	q.data = append(q.data, n)
 	return q
 }

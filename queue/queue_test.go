@@ -6,7 +6,7 @@ import (
 
 func ExampleQueue() {
 	queue := New()
-	result, _ := queue.Queue(1).Queue(2).Queue(3).Peek()
+	result, _ := queue.Enqueue(1).Enqueue(2).Enqueue(3).Peek()
 	fmt.Println(result)
 	fmt.Println(queue.IsEmpty())
 	result, _ = queue.Dequeue()
