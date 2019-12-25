@@ -1,5 +1,5 @@
 /*
-Package tree provides a Tree data structure
+Package tree provides a Tree data structure (Binary Search Tree)
 We assume that every value is of type "int" and is unique
 */
 package tree
