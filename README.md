@@ -6,3 +6,4 @@ An implementation in Go of the following data structures:
 - Stack
 - Queue
 - Binary Search Tree
+- Graph
