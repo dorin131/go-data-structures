@@ -17,11 +17,10 @@ func ExampleGraph() {
 	fmt.Println(node2)
 	fmt.Println(graph.Nodes())
 	graph.AddEdge(node0, node2, 5)
-	fmt.Println(graph.Neighbors(node0))
+	graph.Neighbors(node0)
 	// Output:
 	// 0
 	// 1
 	// 2
 	// [0 1 2]
-	// [1 2]
 }

@@ -55,7 +55,7 @@ func (g *Graph) Neighbors(id int) []int {
 // Nodes : returns a list of node IDs
 func (g *Graph) Nodes() []int {
 	nodes := make([]int, len(g.nodes))
-	for i := 0; i < len(g.nodes); i++ {
+	for i := range g.nodes {
 		nodes[i] = i
 	}
 	return nodes
