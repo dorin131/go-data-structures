@@ -64,7 +64,7 @@ func (g *Graph) Nodes() []int {
 // Edges : returns a list of edges with weights
 func (g *Graph) Edges() [][3]int {
 	edges := make([][3]int, 0, len(g.nodes))
-	for i := 0; i < len(g.nodes); i++ {
+	for i := range g.nodes {
 		for k, v := range g.nodes[i].edges {
 			edges = append(edges, [3]int{i, k, int(v)})
 		}
