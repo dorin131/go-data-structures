@@ -1,3 +1,3 @@
 module github.com/dorin131/go-data-structures
 
-go 1.12
+go 1.13

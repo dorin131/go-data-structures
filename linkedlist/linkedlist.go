@@ -29,6 +29,14 @@ func New() *LinkedList {
 	}
 }
 
+// IsEmpty : check if there are any elements in the list
+func (ll *LinkedList) IsEmpty() bool {
+	if ll.Head == nil {
+		return true
+	}
+	return false
+}
+
 // Append : Appending a new node to the end of the Linked List
 func (ll *LinkedList) Append(d interface{}) *LinkedList {
 	nextNode := &Node{

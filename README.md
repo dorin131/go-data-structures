@@ -7,3 +7,4 @@ An implementation in Go of the following data structures:
 - Queue
 - Binary Search Tree
 - Graph
+- Hash Table
