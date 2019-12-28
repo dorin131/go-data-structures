@@ -32,7 +32,7 @@ func hash(s string) int {
 	h := 0
 	// char[0] * 31^n-1 + char[1] * 31^n-2 + ... + char[n-1]
 	for pos, char := range s {
-		h += int(char) * int(math.Pow(31, float64(pos)))
+		h += int(char) * int(math.Pow(31, float64(len(s)-pos+1)))
 	}
 	return h
 }
