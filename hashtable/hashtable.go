@@ -4,12 +4,16 @@ Package hashtable provides a Hash Table
 package hashtable
 
 import (
+	"math"
+
 	"github.com/dorin131/go-data-structures/linkedlist"
 )
 
+const arrayLength = 100
+
 // HashTable : a hash table data structure
 type HashTable struct {
-	data []*linkedlist.LinkedList
+	data [arrayLength]*linkedlist.LinkedList
 }
 
 type listData struct {
@@ -20,18 +24,24 @@ type listData struct {
 // New : a hash table constructor
 func New() *HashTable {
 	return &HashTable{
-		make([]*linkedlist.LinkedList, 5),
+		[arrayLength]*linkedlist.LinkedList{},
 	}
 }
 
 func hash(s string) int {
-	return 0
+	h := 0
+	// char[0] * 31^n-1 + char[1] * 31^n-2 + ... + char[n-1]
+	for pos, char := range s {
+		h += int(char) * int(math.Pow(31, float64(pos)))
+	}
+	return h
 }
 
 func index(hash int) int {
-	return 0
+	return hash % arrayLength
 }
 
+// Set : set a key and value
 func (h *HashTable) Set(k, v string) *HashTable {
 	index := index(hash(k))
 
@@ -57,6 +67,7 @@ func (h *HashTable) Set(k, v string) *HashTable {
 	return h
 }
 
+// Get : get a value by key
 func (h *HashTable) Get(k string) (result string, ok bool) {
 	index := index(hash(k))
 	linkedList := h.data[index]

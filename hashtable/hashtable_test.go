@@ -4,24 +4,6 @@ import (
 	"testing"
 )
 
-func TestHashTableBasic(t *testing.T) {
-	h := New()
-	if h.data[0] != nil {
-		t.Error("Expected hash data to be nil")
-	}
-	h.Set("Dorin", "great")
-
-	if h.data[0] == nil {
-		t.Error("Expected hash data to be NOT nil")
-	}
-
-	if result, ok := h.Get("Dorin"); !ok {
-		t.Error("Expected Get to return a value")
-	} else {
-		t.Logf("Got %s\n", result)
-	}
-}
-
 func TestHashTableSetGet(t *testing.T) {
 	var h *HashTable
 	testCases := []struct {
