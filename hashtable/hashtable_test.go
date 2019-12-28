@@ -12,6 +12,7 @@ func TestHashTableSetGet(t *testing.T) {
 	}{
 		{"Dorin", "Great"},
 		{"SomeKey", "SomeValue"},
+		{"SomeKey", "SomeOtherValue"},
 		{"__", "%"},
 		{" ", ""},
 		{"", " "},
