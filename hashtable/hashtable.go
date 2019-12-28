@@ -18,7 +18,7 @@ type HashTable struct {
 
 type listData struct {
 	key   string
-	value string
+	value interface{}
 }
 
 // New : a hash table constructor
@@ -42,7 +42,7 @@ func index(hash int) int {
 }
 
 // Set : set a key and value
-func (h *HashTable) Set(k, v string) *HashTable {
+func (h *HashTable) Set(k string, v interface{}) *HashTable {
 	index := index(hash(k))
 
 	if h.data[index] == nil {
@@ -68,7 +68,7 @@ func (h *HashTable) Set(k, v string) *HashTable {
 }
 
 // Get : get a value by key
-func (h *HashTable) Get(k string) (result string, ok bool) {
+func (h *HashTable) Get(k string) (result interface{}, ok bool) {
 	index := index(hash(k))
 	linkedList := h.data[index]
 
