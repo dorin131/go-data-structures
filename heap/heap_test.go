@@ -29,6 +29,7 @@ func TestHeap(t *testing.T) {
 			h.Insert(n)
 		}
 		result := h.Min()
+		fmt.Println(result)
 		if result != test.expected {
 			t.Errorf("[%d] Expected: %v. Got: %v", i, test.expected, result)
 		}

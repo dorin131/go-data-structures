@@ -17,11 +17,11 @@ func New() *Heap {
 	}
 }
 
-func (h *Heap) getLeftChildIndex(parentIndex int) int {
+func (h *Heap) getLeftIndex(parentIndex int) int {
 	return 2*parentIndex + 1
 }
 
-func (h *Heap) getRightChildIndex(parentIndex int) int {
+func (h *Heap) getRightIndex(parentIndex int) int {
 	return 2*parentIndex + 2
 }
 
@@ -29,24 +29,24 @@ func (h *Heap) getParentIndex(childIndex int) int {
 	return (childIndex - 1) / 2
 }
 
-func (h *Heap) hasLeftChild(index int) bool {
-	return h.getLeftChildIndex(index) < len(h.items)
+func (h *Heap) hasLeft(index int) bool {
+	return h.getLeftIndex(index) < len(h.items)
 }
 
-func (h *Heap) hasRightChild(index int) bool {
-	return h.getRightChildIndex(index) < len(h.items)
+func (h *Heap) hasRight(index int) bool {
+	return h.getRightIndex(index) < len(h.items)
 }
 
 func (h *Heap) hasParent(index int) bool {
 	return h.getParentIndex(index) >= 0
 }
 
-func (h *Heap) leftChild(index int) int {
-	return h.items[h.getLeftChildIndex(index)]
+func (h *Heap) left(index int) int {
+	return h.items[h.getLeftIndex(index)]
 }
 
-func (h *Heap) rightChild(index int) int {
-	return h.items[h.getRightChildIndex(index)]
+func (h *Heap) right(index int) int {
+	return h.items[h.getRightIndex(index)]
 }
 
 func (h *Heap) parent(index int) int {
@@ -90,14 +90,14 @@ func (h *Heap) Insert(item int) *Heap {
 
 func (h *Heap) bubbleDown() {
 	index := 0
-	for (h.hasLeftChild(index) && h.items[index] > h.leftChild(index)) ||
-		(h.hasRightChild(index) && h.items[index] > h.rightChild(index)) {
-		if h.hasLeftChild(index) && h.items[index] > h.leftChild(index) {
-			h.swap(index, h.getLeftChildIndex(index))
-			index = h.getLeftChildIndex(index)
+	for (h.hasLeft(index) && h.items[index] > h.left(index)) ||
+		(h.hasRight(index) && h.items[index] > h.right(index)) {
+		if h.hasLeft(index) && h.items[index] > h.left(index) {
+			h.swap(index, h.getLeftIndex(index))
+			index = h.getLeftIndex(index)
 		} else {
-			h.swap(index, h.getRightChildIndex(index))
-			index = h.getRightChildIndex(index)
+			h.swap(index, h.getRightIndex(index))
+			index = h.getRightIndex(index)
 		}
 	}
 }
