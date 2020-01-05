@@ -6,7 +6,7 @@ import (
 )
 
 func ExampleMinHeap() {
-	h := New([]int{})
+	h := New([]int{100, 500})
 	h.Insert(333).Insert(-3).Insert(0).Insert(1000).Insert(-44).Insert(5)
 	fmt.Println(h.ExtractMin())
 	// Output:
