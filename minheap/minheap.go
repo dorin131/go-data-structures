@@ -24,7 +24,7 @@ func New(input []int) *MinHeap {
 		},
 	}
 
-	if len(h.Items) > 0 {
+	if h.Elements > 0 {
 		h.buildMinHeap()
 	}
 
@@ -33,37 +33,48 @@ func New(input []int) *MinHeap {
 
 // ExtractMin : removes top element of the heap and returns it
 func (h *MinHeap) ExtractMin() int {
-	if len(h.Items) == 0 {
+	if h.Elements == 0 {
 		log.Fatal("No items in the heap")
 	}
-	item := h.Items[0]
-	h.Items[0] = h.Items[len(h.Items)-1]
-	h.Items = h.Items[:len(h.Items)-1]
+	minItem := h.Items[0]
+	lastIndex := h.Elements - 1
+	h.Items[0] = h.Items[lastIndex]
 
-	h.minHeapifyDown()
+	// storing minimum at the end of the slice
+	h.Items[lastIndex] = minItem
 
-	return item
+	h.minHeapifyDown(0)
+
+	h.Elements--
+
+	return minItem
 }
 
 // Insert : adds a new element to the heap
 func (h *MinHeap) Insert(item int) *MinHeap {
 	h.Items = append(h.Items, item)
-	lastElementIndex := len(h.Items) - 1
+	h.Elements++
+	lastElementIndex := h.Elements - 1
 	h.minHeapifyUp(lastElementIndex)
+
+	if len(h.Items) > h.Size {
+		h.Size++
+	}
 
 	return h
 }
 
+// buildMinHeap : given a slice, arrange the elements so that
+// they satisfy the Min Heap properties
 func (h *MinHeap) buildMinHeap() {
-	for i := len(h.Items) / 2; i >= 0; i-- {
+	for i := h.Elements / 2; i >= 0; i-- {
 		h.minHeapifyUp(i)
 	}
 }
 
 // minHeapifyDown : takes the top element and moves it down until
-// the min-heap properties are satisfied
-func (h *MinHeap) minHeapifyDown() {
-	index := 0
+// the Min Heap properties are satisfied
+func (h *MinHeap) minHeapifyDown(index int) {
 	for (h.HasLeft(index) && h.Items[index] > h.Left(index)) ||
 		(h.HasRight(index) && h.Items[index] > h.Right(index)) {
 		if h.HasLeft(index) && h.Items[index] > h.Left(index) {
@@ -77,7 +88,7 @@ func (h *MinHeap) minHeapifyDown() {
 }
 
 // minHeapUp : takes the last element and moves it up until
-// the min-heap properties are satisfied
+// the Min Heap properties are satisfied
 func (h *MinHeap) minHeapifyUp(index int) {
 	for h.HasParent(index) && h.Parent(index) > h.Items[index] {
 		h.Swap(h.GetParentIndex(index), index)
