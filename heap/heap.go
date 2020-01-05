@@ -6,7 +6,9 @@ package heap
 
 // Heap : contains a slice which holds the underlying heap data
 type Heap struct {
-	Items []int
+	Size     int
+	Elements int
+	Items    []int
 }
 
 // GetLeftIndex : get left index of a Heap node

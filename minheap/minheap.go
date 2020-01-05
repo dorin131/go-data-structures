@@ -15,12 +15,20 @@ type MinHeap struct {
 }
 
 // New : returns a new instance of a Heap
-func New() *MinHeap {
-	return &MinHeap{
+func New(input []int) *MinHeap {
+	h := &MinHeap{
 		&heap.Heap{
-			Items: []int{},
+			Size:     len(input),
+			Elements: len(input),
+			Items:    input,
 		},
 	}
+
+	if len(h.Items) > 0 {
+		h.buildMinHeap()
+	}
+
+	return h
 }
 
 // ExtractMin : removes top element of the heap and returns it
@@ -40,10 +48,16 @@ func (h *MinHeap) ExtractMin() int {
 // Insert : adds a new element to the heap
 func (h *MinHeap) Insert(item int) *MinHeap {
 	h.Items = append(h.Items, item)
-
-	h.minHeapifyUp()
+	lastElementIndex := len(h.Items) - 1
+	h.minHeapifyUp(lastElementIndex)
 
 	return h
+}
+
+func (h *MinHeap) buildMinHeap() {
+	for i := len(h.Items) / 2; i >= 0; i-- {
+		h.minHeapifyUp(i)
+	}
 }
 
 // minHeapifyDown : takes the top element and moves it down until
@@ -64,8 +78,7 @@ func (h *MinHeap) minHeapifyDown() {
 
 // minHeapUp : takes the last element and moves it up until
 // the min-heap properties are satisfied
-func (h *MinHeap) minHeapifyUp() {
-	index := len(h.Items) - 1
+func (h *MinHeap) minHeapifyUp(index int) {
 	for h.HasParent(index) && h.Parent(index) > h.Items[index] {
 		h.Swap(h.GetParentIndex(index), index)
 		index = h.GetParentIndex(index)
