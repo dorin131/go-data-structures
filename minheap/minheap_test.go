@@ -1,19 +1,19 @@
-package heap
+package minheap
 
 import (
 	"fmt"
 	"testing"
 )
 
-func ExampleHeap() {
+func ExampleMinHeap() {
 	h := New()
 	h.Insert(333).Insert(-3).Insert(0).Insert(1000).Insert(-44).Insert(5)
-	fmt.Println(h.Min())
+	fmt.Println(h.ExtractMin())
 	// Output:
 	// -44
 }
 
-func TestHeap(t *testing.T) {
+func TestMinHeap(t *testing.T) {
 	tests := []struct {
 		given    []int
 		expected int
@@ -28,8 +28,7 @@ func TestHeap(t *testing.T) {
 		for _, n := range test.given {
 			h.Insert(n)
 		}
-		result := h.Min()
-		fmt.Println(result)
+		result := h.ExtractMin()
 		if result != test.expected {
 			t.Errorf("[%d] Expected: %v. Got: %v", i, test.expected, result)
 		}

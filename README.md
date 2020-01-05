@@ -8,4 +8,5 @@ An implementation in Go of the following data structures:
 - Binary Search Tree
 - Graph
 - Hash Table
-- Heap
+- Min Heap
+- Max heap

@@ -1,111 +1,60 @@
 /*
-Package heap provides an implementation of a Min Heap data structure
+Package heap provides helper methods for a Min Heap or a Max Heap
+Not to be used on its own.
 */
 package heap
 
-import "log"
-
 // Heap : contains a slice which holds the underlying heap data
 type Heap struct {
-	items []int
+	Items []int
 }
 
-// New : returns a new instance of a Heap
-func New() *Heap {
-	return &Heap{
-		items: []int{},
-	}
-}
-
-func (h *Heap) getLeftIndex(parentIndex int) int {
+// GetLeftIndex : get left index of a Heap node
+func (h *Heap) GetLeftIndex(parentIndex int) int {
 	return 2*parentIndex + 1
 }
 
-func (h *Heap) getRightIndex(parentIndex int) int {
+// GetRightIndex : get right index of a Heap node
+func (h *Heap) GetRightIndex(parentIndex int) int {
 	return 2*parentIndex + 2
 }
 
-func (h *Heap) getParentIndex(childIndex int) int {
+// GetParentIndex : get parent index of a Heap node
+func (h *Heap) GetParentIndex(childIndex int) int {
 	return (childIndex - 1) / 2
 }
 
-func (h *Heap) hasLeft(index int) bool {
-	return h.getLeftIndex(index) < len(h.items)
+// HasLeft : check if node at index has left node
+func (h *Heap) HasLeft(index int) bool {
+	return h.GetLeftIndex(index) < len(h.Items)
 }
 
-func (h *Heap) hasRight(index int) bool {
-	return h.getRightIndex(index) < len(h.items)
+// HasRight : check if node at index has right node
+func (h *Heap) HasRight(index int) bool {
+	return h.GetRightIndex(index) < len(h.Items)
 }
 
-func (h *Heap) hasParent(index int) bool {
-	return h.getParentIndex(index) >= 0
+// HasParent : check if node at index has parent node
+func (h *Heap) HasParent(index int) bool {
+	return h.GetParentIndex(index) >= 0
 }
 
-func (h *Heap) left(index int) int {
-	return h.items[h.getLeftIndex(index)]
+// Left : get left node value, given an index
+func (h *Heap) Left(index int) int {
+	return h.Items[h.GetLeftIndex(index)]
 }
 
-func (h *Heap) right(index int) int {
-	return h.items[h.getRightIndex(index)]
+// Right : get right node value, given an index
+func (h *Heap) Right(index int) int {
+	return h.Items[h.GetRightIndex(index)]
 }
 
-func (h *Heap) parent(index int) int {
-	return h.items[h.getParentIndex(index)]
+// Parent : get parent node value, given an index
+func (h *Heap) Parent(index int) int {
+	return h.Items[h.GetParentIndex(index)]
 }
 
-func (h *Heap) swap(indexOne, indexTwo int) {
-	h.items[indexOne], h.items[indexTwo] = h.items[indexTwo], h.items[indexOne]
-}
-
-// Min : returns the top element of the heap
-func (h *Heap) Min() int {
-	if len(h.items) == 0 {
-		log.Fatal("No items in the heap")
-	}
-	return h.items[0]
-}
-
-// ExtractMin : removes top element of the heap and returns it
-func (h *Heap) ExtractMin() int {
-	if len(h.items) == 0 {
-		log.Fatal("No items in the heap")
-	}
-	item := h.items[0]
-	h.items[0] = h.items[len(h.items)-1]
-	h.items = h.items[:len(h.items)-1]
-
-	h.bubbleDown()
-
-	return item
-}
-
-// Insert : adds a new element to the heap
-func (h *Heap) Insert(item int) *Heap {
-	h.items = append(h.items, item)
-
-	h.bubbleUp()
-
-	return h
-}
-
-func (h *Heap) bubbleDown() {
-	index := 0
-	for (h.hasLeft(index) && h.items[index] > h.left(index)) ||
-		(h.hasRight(index) && h.items[index] > h.right(index)) {
-		if h.hasLeft(index) && h.items[index] > h.left(index) {
-			h.swap(index, h.getLeftIndex(index))
-			index = h.getLeftIndex(index)
-		} else {
-			h.swap(index, h.getRightIndex(index))
-			index = h.getRightIndex(index)
-		}
-	}
-}
-
-func (h *Heap) bubbleUp() {
-	index := len(h.items) - 1
-	for h.hasParent(index) && h.parent(index) > h.items[index] {
-		h.swap(h.getParentIndex(index), index)
-		index = h.getParentIndex(index)
-	}
+// Swap : swap values of two nodes at specified indeces
+func (h *Heap) Swap(indexOne, indexTwo int) {
+	h.Items[indexOne], h.Items[indexTwo] = h.Items[indexTwo], h.Items[indexOne]
 }
