@@ -18,13 +18,12 @@ type MinHeap struct {
 func New(input []int) *MinHeap {
 	h := &MinHeap{
 		&heap.Heap{
-			Size:     len(input),
-			Elements: len(input),
-			Items:    input,
+			Size:  len(input),
+			Items: input,
 		},
 	}
 
-	if h.Elements > 0 {
+	if h.Size > 0 {
 		h.buildMinHeap()
 	}
 
@@ -33,11 +32,11 @@ func New(input []int) *MinHeap {
 
 // ExtractMin : removes top element of the heap and returns it
 func (h *MinHeap) ExtractMin() int {
-	if h.Elements == 0 {
+	if h.Size == 0 {
 		log.Fatal("No items in the heap")
 	}
 	minItem := h.Items[0]
-	lastIndex := h.Elements - 1
+	lastIndex := h.Size - 1
 	h.Items[0] = h.Items[lastIndex]
 
 	// storing minimum at the end of the slice
@@ -45,7 +44,7 @@ func (h *MinHeap) ExtractMin() int {
 
 	h.minHeapifyDown(0)
 
-	h.Elements--
+	h.Size--
 
 	return minItem
 }
@@ -53,13 +52,9 @@ func (h *MinHeap) ExtractMin() int {
 // Insert : adds a new element to the heap
 func (h *MinHeap) Insert(item int) *MinHeap {
 	h.Items = append(h.Items, item)
-	h.Elements++
-	lastElementIndex := h.Elements - 1
+	h.Size++
+	lastElementIndex := h.Size - 1
 	h.minHeapifyUp(lastElementIndex)
-
-	if len(h.Items) > h.Size {
-		h.Size++
-	}
 
 	return h
 }
@@ -67,7 +62,7 @@ func (h *MinHeap) Insert(item int) *MinHeap {
 // buildMinHeap : given a slice, arrange the elements so that
 // they satisfy the Min Heap properties
 func (h *MinHeap) buildMinHeap() {
-	for i := h.Elements / 2; i >= 0; i-- {
+	for i := h.Size / 2; i >= 0; i-- {
 		h.minHeapifyUp(i)
 	}
 }

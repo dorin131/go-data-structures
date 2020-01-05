@@ -5,10 +5,9 @@ Not to be used on its own.
 package heap
 
 // Heap : contains a slice which holds the underlying heap data
-type Heap struct {
-	Size     int // the total number of elements, which doesn't go down on extract
-	Elements int // the total number of elements, which goes down on extract
-	Items    []int
+type Heap struct { // the total number of elements, which doesn't go down on extract
+	Size  int // the total number of elements, which goes down on extract
+	Items []int
 }
 
 // GetLeftIndex : get left index of a Heap node
@@ -68,6 +67,5 @@ func (h *Heap) GetAllItems() []int {
 
 // TrimItems : remove all elements outside the Heap
 func (h *Heap) TrimItems() {
-	h.Items = h.Items[:h.Elements-1]
-	h.Size = h.Elements
+	h.Items = h.Items[:h.Size-1]
 }

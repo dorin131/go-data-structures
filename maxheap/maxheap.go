@@ -18,13 +18,12 @@ type MaxHeap struct {
 func New(input []int) *MaxHeap {
 	h := &MaxHeap{
 		&heap.Heap{
-			Size:     len(input),
-			Elements: len(input),
-			Items:    input,
+			Size:  len(input),
+			Items: input,
 		},
 	}
 
-	if h.Elements > 0 {
+	if h.Size > 0 {
 		h.buildMaxHeap()
 	}
 
@@ -32,7 +31,7 @@ func New(input []int) *MaxHeap {
 }
 
 func (h *MaxHeap) buildMaxHeap() {
-	for i := h.Elements / 2; i >= 0; i-- {
+	for i := h.Size / 2; i >= 0; i-- {
 		h.maxHeapifyDown(i)
 	}
 }
@@ -40,24 +39,20 @@ func (h *MaxHeap) buildMaxHeap() {
 // Insert : adds an element to the heap
 func (h *MaxHeap) Insert(item int) *MaxHeap {
 	h.Items = append(h.Items, item)
-	h.Elements++
-	lastElementIndex := h.Elements - 1
+	h.Size++
+	lastElementIndex := h.Size - 1
 	h.maxHeapifyUp(lastElementIndex)
-
-	if len(h.Items) > h.Size {
-		h.Size++
-	}
 
 	return h
 }
 
 // ExtractMax : returns the maximum element and removes it from the Heap
 func (h *MaxHeap) ExtractMax() int {
-	if h.Elements == 0 {
+	if h.Size == 0 {
 		log.Fatal("No items in the heap")
 	}
 	minItem := h.Items[0]
-	lastIndex := h.Elements - 1
+	lastIndex := h.Size - 1
 	h.Items[0] = h.Items[lastIndex]
 
 	// storing minimum at the end of the slice
@@ -65,7 +60,7 @@ func (h *MaxHeap) ExtractMax() int {
 
 	h.maxHeapifyDown(0)
 
-	h.Elements--
+	h.Size--
 
 	return minItem
 }
