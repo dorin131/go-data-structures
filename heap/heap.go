@@ -27,12 +27,12 @@ func (h *Heap) GetParentIndex(childIndex int) int {
 
 // HasLeft : check if node at index has left node
 func (h *Heap) HasLeft(index int) bool {
-	return h.GetLeftIndex(index) < len(h.Items)
+	return h.GetLeftIndex(index) < h.Size
 }
 
 // HasRight : check if node at index has right node
 func (h *Heap) HasRight(index int) bool {
-	return h.GetRightIndex(index) < len(h.Items)
+	return h.GetRightIndex(index) < h.Size
 }
 
 // HasParent : check if node at index has parent node
