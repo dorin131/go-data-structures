@@ -67,5 +67,5 @@ func (h *Heap) GetAllItems() []int {
 
 // TrimItems : remove all elements outside the Heap
 func (h *Heap) TrimItems() {
-	h.Items = h.Items[:h.Size-1]
+	h.Items = h.Items[:h.Size]
 }
