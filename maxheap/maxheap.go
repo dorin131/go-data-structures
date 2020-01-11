@@ -31,8 +31,8 @@ func New(input []int) *MaxHeap {
 }
 
 func (h *MaxHeap) buildMaxHeap() {
-	for i := h.Size / 2; i >= 0; i-- {
-		h.maxHeapifyDown(i)
+	for i := h.Size/2 - 1; i >= 0; i-- {
+		h.maxHeapify(i)
 	}
 }
 
@@ -96,5 +96,14 @@ func (h *MaxHeap) maxHeapifyDown(index int) {
 			h.Swap(index, h.GetRightIndex(index))
 			index = h.GetRightIndex(index)
 		}
+	}
+}
+
+func (h *MaxHeap) maxHeapify(index int) {
+	if h.HasRight(index) && (h.Right(index) > h.Items[index]) {
+		h.Swap(h.GetRightIndex(index), index)
+	}
+	if h.HasLeft(index) && (h.Left(index) > h.Items[index]) {
+		h.Swap(h.GetLeftIndex(index), index)
 	}
 }

@@ -62,8 +62,8 @@ func (h *MinHeap) Insert(item int) *MinHeap {
 // buildMinHeap : given a slice, arrange the elements so that
 // they satisfy the Min Heap properties
 func (h *MinHeap) buildMinHeap() {
-	for i := h.Size / 2; i >= 0; i-- {
-		h.minHeapifyUp(i)
+	for i := h.Size/2 - 1; i >= 0; i-- {
+		h.minHeapify(i)
 	}
 }
 
@@ -88,5 +88,14 @@ func (h *MinHeap) minHeapifyUp(index int) {
 	for h.HasParent(index) && h.Parent(index) > h.Items[index] {
 		h.Swap(h.GetParentIndex(index), index)
 		index = h.GetParentIndex(index)
+	}
+}
+
+func (h *MinHeap) minHeapify(index int) {
+	if h.HasRight(index) && (h.Right(index) < h.Items[index]) {
+		h.Swap(h.GetRightIndex(index), index)
+	}
+	if h.HasLeft(index) && (h.Left(index) < h.Items[index]) {
+		h.Swap(h.GetLeftIndex(index), index)
 	}
 }

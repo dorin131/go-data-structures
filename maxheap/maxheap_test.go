@@ -15,19 +15,18 @@ func ExampleMaxHeap() {
 
 func TestMaxHeap(t *testing.T) {
 	tests := []struct {
-		initial      []int
-		toAdd        []int
-		expectedMax  int
-		expectedSize int
+		initial     []int
+		toAdd       []int
+		expectedMax int
 	}{
-		{[]int{}, []int{1, 2, 3, 4, 5}, 5, 4},
-		{[]int{}, []int{300, 5, 77, -8, 0, 50}, 300, 5},
-		{[]int{}, []int{-1000, 1000}, 1000, 1},
-		{[]int{}, []int{1000, -1000}, 1000, 1},
-		{[]int{0, 7, 10}, []int{1, 2, 3, 4, 5}, 10, 7},
-		{[]int{100}, []int{300, 5, 77, -8, 0, 50}, 300, 6},
-		{[]int{-2000, 0, 800}, []int{-1000, 1000}, 1000, 4},
-		{[]int{5000, 10000}, []int{1000, -1000}, 10000, 3},
+		{[]int{}, []int{1, 2, 3, 4, 5}, 5},
+		{[]int{}, []int{300, 5, 77, -8, 0, 50}, 300},
+		{[]int{}, []int{-1000, 1000}, 1000},
+		{[]int{}, []int{1000, -1000}, 1000},
+		{[]int{0, 7, 10}, []int{1, 2, 3, 4, 5}, 10},
+		{[]int{100}, []int{300, 5, 77, -8, 0, 50}, 300},
+		{[]int{-2000, 0, 800}, []int{-1000, 1000}, 1000},
+		{[]int{5000, 10000}, []int{1000, -1000}, 10000},
 	}
 	for i, test := range tests {
 		h := New(test.initial)
@@ -37,9 +36,6 @@ func TestMaxHeap(t *testing.T) {
 		result := h.ExtractMax()
 		if result != test.expectedMax {
 			t.Errorf("[%d] Expected Max to be: %v. Got: %v", i, test.expectedMax, result)
-		}
-		if h.Size != test.expectedSize {
-			t.Errorf("[%d] Expected number of Elements to be: %v. Got: %v", i, test.expectedSize, h.Size)
 		}
 	}
 }
