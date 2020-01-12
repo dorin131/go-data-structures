@@ -6,7 +6,6 @@ package heap
 
 // Heap : contains a slice which holds the underlying heap data
 type Heap struct { // the total number of elements, which doesn't go down on extract
-	Size  int // the total number of elements, which goes down on extract
 	Items []int
 }
 
@@ -58,14 +57,4 @@ func (h *Heap) Parent(index int) int {
 // Swap : swap values of two nodes at specified indeces
 func (h *Heap) Swap(indexOne, indexTwo int) {
 	h.Items[indexOne], h.Items[indexTwo] = h.Items[indexTwo], h.Items[indexOne]
-}
-
-// GetAllItems : returns all elements, including those discarded by extractions
-func (h *Heap) GetAllItems() []int {
-	return h.Items
-}
-
-// TrimItems : remove all elements outside the Heap
-func (h *Heap) TrimItems() {
-	h.Items = h.Items[:h.Size-1]
 }

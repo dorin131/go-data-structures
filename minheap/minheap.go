@@ -18,12 +18,11 @@ type MinHeap struct {
 func New(input []int) *MinHeap {
 	h := &MinHeap{
 		&heap.Heap{
-			Size:  len(input),
 			Items: input,
 		},
 	}
 
-	if h.Size > 0 {
+	if len(h.Items) > 0 {
 		h.buildMinHeap()
 	}
 
@@ -32,19 +31,17 @@ func New(input []int) *MinHeap {
 
 // ExtractMin : removes top element of the heap and returns it
 func (h *MinHeap) ExtractMin() int {
-	if h.Size == 0 {
+	if len(h.Items) == 0 {
 		log.Fatal("No items in the heap")
 	}
 	minItem := h.Items[0]
-	lastIndex := h.Size - 1
+	lastIndex := len(h.Items) - 1
 	h.Items[0] = h.Items[lastIndex]
 
-	// storing minimum at the end of the slice
-	h.Items[lastIndex] = minItem
+	// shrinking slice
+	h.Items = h.Items[:len(h.Items)-1]
 
 	h.minHeapifyDown(0)
-
-	h.Size--
 
 	return minItem
 }
@@ -52,8 +49,7 @@ func (h *MinHeap) ExtractMin() int {
 // Insert : adds a new element to the heap
 func (h *MinHeap) Insert(item int) *MinHeap {
 	h.Items = append(h.Items, item)
-	h.Size++
-	lastElementIndex := h.Size - 1
+	lastElementIndex := len(h.Items) - 1
 	h.minHeapifyUp(lastElementIndex)
 
 	return h
@@ -62,17 +58,26 @@ func (h *MinHeap) Insert(item int) *MinHeap {
 // buildMinHeap : given a slice, arrange the elements so that
 // they satisfy the Min Heap properties
 func (h *MinHeap) buildMinHeap() {
-	for i := h.Size/2 - 1; i >= 0; i-- {
-		h.minHeapify(i)
+	for i := len(h.Items)/2 - 1; i >= 0; i-- {
+		h.minHeapifyDown(i)
 	}
 }
 
 // minHeapifyDown : takes the top element and moves it down until
 // the Min Heap properties are satisfied
 func (h *MinHeap) minHeapifyDown(index int) {
-	for (h.HasLeft(index) && h.Items[index] > h.Left(index)) ||
-		(h.HasRight(index) && h.Items[index] > h.Right(index)) {
-		if h.HasLeft(index) && h.Items[index] > h.Left(index) {
+	for (h.HasLeft(index) && (h.Items[index] > h.Left(index))) ||
+		(h.HasRight(index) && (h.Items[index] > h.Right(index))) {
+		if (h.HasLeft(index) && (h.Items[index] > h.Left(index))) &&
+			(h.HasRight(index) && (h.Items[index] > h.Right(index))) {
+			if h.Left(index) < h.Right(index) {
+				h.Swap(index, h.GetLeftIndex(index))
+				index = h.GetLeftIndex(index)
+			} else {
+				h.Swap(index, h.GetRightIndex(index))
+				index = h.GetRightIndex(index)
+			}
+		} else if h.HasLeft(index) && (h.Items[index] > h.Left(index)) {
 			h.Swap(index, h.GetLeftIndex(index))
 			index = h.GetLeftIndex(index)
 		} else {
@@ -85,17 +90,8 @@ func (h *MinHeap) minHeapifyDown(index int) {
 // minHeapUp : takes the last element and moves it up until
 // the Min Heap properties are satisfied
 func (h *MinHeap) minHeapifyUp(index int) {
-	for h.HasParent(index) && h.Parent(index) > h.Items[index] {
+	for h.HasParent(index) && (h.Parent(index) > h.Items[index]) {
 		h.Swap(h.GetParentIndex(index), index)
 		index = h.GetParentIndex(index)
-	}
-}
-
-func (h *MinHeap) minHeapify(index int) {
-	if h.HasRight(index) && (h.Right(index) < h.Items[index]) {
-		h.Swap(h.GetRightIndex(index), index)
-	}
-	if h.HasLeft(index) && (h.Left(index) < h.Items[index]) {
-		h.Swap(h.GetLeftIndex(index), index)
 	}
 }

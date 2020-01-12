@@ -18,12 +18,11 @@ type MaxHeap struct {
 func New(input []int) *MaxHeap {
 	h := &MaxHeap{
 		&heap.Heap{
-			Size:  len(input),
 			Items: input,
 		},
 	}
 
-	if h.Size > 0 {
+	if len(h.Items) > 0 {
 		h.buildMaxHeap()
 	}
 
@@ -31,16 +30,15 @@ func New(input []int) *MaxHeap {
 }
 
 func (h *MaxHeap) buildMaxHeap() {
-	for i := h.Size/2 - 1; i >= 0; i-- {
-		h.maxHeapify(i)
+	for i := len(h.Items)/2 - 1; i >= 0; i-- {
+		h.maxHeapifyDown(i)
 	}
 }
 
 // Insert : adds an element to the heap
 func (h *MaxHeap) Insert(item int) *MaxHeap {
 	h.Items = append(h.Items, item)
-	h.Size++
-	lastElementIndex := h.Size - 1
+	lastElementIndex := len(h.Items) - 1
 	h.maxHeapifyUp(lastElementIndex)
 
 	return h
@@ -48,19 +46,17 @@ func (h *MaxHeap) Insert(item int) *MaxHeap {
 
 // ExtractMax : returns the maximum element and removes it from the Heap
 func (h *MaxHeap) ExtractMax() int {
-	if h.Size == 0 {
+	if len(h.Items) == 0 {
 		log.Fatal("No items in the heap")
 	}
 	minItem := h.Items[0]
-	lastIndex := h.Size - 1
+	lastIndex := len(h.Items) - 1
 	h.Items[0] = h.Items[lastIndex]
 
-	// storing minimum at the end of the slice
-	h.Items[lastIndex] = minItem
+	// shrinking slice
+	h.Items = h.Items[:len(h.Items)-1]
 
 	h.maxHeapifyDown(0)
-
-	h.Size--
 
 	return minItem
 }
@@ -96,14 +92,5 @@ func (h *MaxHeap) maxHeapifyDown(index int) {
 			h.Swap(index, h.GetRightIndex(index))
 			index = h.GetRightIndex(index)
 		}
-	}
-}
-
-func (h *MaxHeap) maxHeapify(index int) {
-	if h.HasRight(index) && (h.Right(index) > h.Items[index]) {
-		h.Swap(h.GetRightIndex(index), index)
-	}
-	if h.HasLeft(index) && (h.Left(index) > h.Items[index]) {
-		h.Swap(h.GetLeftIndex(index), index)
 	}
 }
