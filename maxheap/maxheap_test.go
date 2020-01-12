@@ -36,11 +36,11 @@ func TestMinHeap(t *testing.T) {
 			h.Insert(n)
 		}
 
-		checkMinHeap(i, h, t)
+		checkMaxHeap(i, h, t)
 	}
 }
 
-func checkMinHeap(n int, h *MaxHeap, t *testing.T) {
+func checkMaxHeap(n int, h *MaxHeap, t *testing.T) {
 	result := []int{}
 	correctlySorted := make([]int, len(h.Items))
 	copy(correctlySorted, h.Items)
