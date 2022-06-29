@@ -24,7 +24,7 @@ func ExampleTreeContains() {
 	// true
 }
 
-func ExampleTreeDiesntContain() {
+func ExampleTreeDoesntContain() {
 	tree := New(5)
 
 	tree.Insert(3).Insert(8).Insert(-5).Insert(200)
