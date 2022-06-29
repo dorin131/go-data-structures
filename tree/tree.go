@@ -49,13 +49,13 @@ func (t *Node) Contains(data int) bool {
 	}
 	if data < t.Data {
 		if t.Left != nil {
-			t.Left.Contains(data)
+			return t.Left.Contains(data)
 		} else {
 			return false
 		}
 	} else {
 		if t.Right != nil {
-			t.Right.Contains(data)
+			return t.Right.Contains(data)
 		} else {
 			return false
 		}
